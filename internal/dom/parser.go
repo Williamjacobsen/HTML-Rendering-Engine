@@ -2,18 +2,15 @@ package dom
 
 import (
 	"strings"
-	"fmt"
 
 	"golang.org/x/net/html"
 )
 
-func parseDocument(htmlDocument string) {
-
-	doc, err := html.Parse(strings.NewReader(htmlDocument))
+func ParseDocument(htmlDocument []byte) (*html.Node, error) {
+	reader := strings.NewReader(string(htmlDocument))
+	doc, err := html.Parse(reader)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	fmt.Printf("%v\n", doc)
-	fmt.Println(doc)
-
+	return doc, nil
 }
