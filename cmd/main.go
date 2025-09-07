@@ -9,9 +9,22 @@ import (
 	"gioui.org/op"
 	"gioui.org/text"
 	"gioui.org/widget/material"
+
+	"github.com/yourusername/HTML-Rendering-Engine/parser"
 )
 
 func main() {
+	data, err := os.ReadFile("test1.html")
+	if err != nil {
+		log.Fatalf("failed to read file: %v", err)
+	}
+
+	doc, err := parser.ParseDocument(data)
+	if err != nil {
+		log.Fatalf("failed to parse document: %v", err)
+	}
+
+
 	go func() {
 		window := new(app.Window)
 		err := run(window)
