@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 	"log"
 	"os"
@@ -10,20 +11,23 @@ import (
 	"gioui.org/text"
 	"gioui.org/widget/material"
 
-	"github.com/yourusername/HTML-Rendering-Engine/parser"
+	"github.com/Williamjacobsen/HTML-Rendering-Engine/internal/dom"
 )
 
 func main() {
-	data, err := os.ReadFile("test1.html")
+	data, err := os.ReadFile("../testdata/test1.html")
 	if err != nil {
 		log.Fatalf("failed to read file: %v", err)
 	}
 
-	doc, err := parser.ParseDocument(data)
+	root, err := dom.ParseDocument(data)
 	if err != nil {
 		log.Fatalf("failed to parse document: %v", err)
 	}
 
+	fmt.Println("Parsed DOM root:", root.Type)	
+
+	return;
 
 	go func() {
 		window := new(app.Window)
